@@ -2,10 +2,10 @@
 /*
  * SCX Lottery Scheduler - 用户空间部分
  */  // SCX彩票调度器 - 用户空间部分
+#include <scx/common.h>  // 包含SCX公共头文件
 #include "scx_lottery.bpf.skel.h"  // 包含BPF骨架头文件
 #include <bpf/bpf.h>  // 包含BPF库头文件
 #include <libgen.h>  // 包含路径处理库头文件
-#include <scx/common.h>  // 包含SCX公共头文件
 #include <signal.h>  // 包含信号处理头文件
 #include <stdio.h>  // 包含标准输入输出头文件
 #include <unistd.h>  // 包含UNIX标准头文件

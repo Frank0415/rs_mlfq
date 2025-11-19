@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Build script for SCX Lottery Scheduler
+# Based on the build process from the markdown guides
+
+set -e  # Exit on any error
+
+echo "Building SCX Lottery Scheduler..."
+
+# Variables
+BPF_C_FILE="scx_lottery.bpf.c"
+BPF_O_FILE="scx_lottery.bpf.o"
+SKELETON_FILE="scx_lottery.bpf.skel.h"
+USER_C_FILE="scx_lottery.c"
+OUTPUT_BINARY="scx_lottery"
+
+# Check if required tools are available
+command -v clang >/dev/null 2>&1 || { echo "Error: clang is required but not installed."; exit 1; }
+command -v bpftool >/dev/null 2>&1 || { echo "Error: bpftool is required but not installed."; exit 1; }
+command -v gcc >/dev/null 2>&1 || { echo "Error: gcc is required but not installed."; exit 1; }
+
+# Step 1: Compile BPF program
+echo "Step 1: Compiling BPF program..."
+clang -g -O2 -target bpf -c $BPF_C_FILE -o $BPF_O_FILE
+
+# Step 2: Generate skeleton
+echo "Step 2: Generating skeleton..."
+bpftool gen skeleton $BPF_O_FILE > $SKELETON_FILE
+
+# Step 3: Compile userspace program with skeleton
+echo "Step 3: Compiling userspace program..."
+gcc -I. -o $OUTPUT_BINARY $USER_C_FILE -lbpf
+
+echo "Build completed successfully!"
+echo "Binary created: $OUTPUT_BINARY"
