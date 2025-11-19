@@ -1,0 +1,8 @@
+*
+
+!Makefile
+!.gitignore
+
+!*.sh
+!*.bpf.c
+!*.c
