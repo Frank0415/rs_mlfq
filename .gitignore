@@ -32,3 +32,6 @@ target
 
 !src
 !src/*.rs
+
+!hello_world
+!playground

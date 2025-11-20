@@ -1,8 +1,3 @@
-[package]
-name = "rs_mlfq"
-version = "0.1.0"
-edition = "2024"
-
-[dependencies]
-libbpf-rs = "0.25.0"
-scx_utils = "1.0.24"
+[workspace]
+resolver = "3"
+members = ["hello_world","playground"]
